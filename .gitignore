@@ -1,0 +1,42 @@
+# Build artifacts
+build/
+bin/
+lib/
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.user
+*.suo
+
+# Dependency directories
+third_party/downloads/
+
+# Generated documentation
+docs/api/generated/
+
+# Test results
+tests/results/
+
+# Platform specific
+.DS_Store
+Thumbs.db
+
+# Sensitive information
+config/credentials.json
+*.pem
+*.key
