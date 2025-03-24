@@ -36,6 +36,14 @@ Wireshark MCP is a secure, enterprise-ready packet capture and analysis tool bas
 
 See the [User Guide](docs/user/user_guide.md) for detailed installation instructions for your platform.
 
+We provide installation scripts for:
+- [Linux](scripts/install_linux.sh)
+- [Windows](scripts/install_windows.ps1)
+
+### Configuration
+
+The application uses a [configuration file](config/wireshark_mcp.conf.template) that can be customized for your environment. Copy the template to `wireshark_mcp.conf` and modify as needed.
+
 ### Basic Usage
 
 1. Launch Wireshark MCP
@@ -67,7 +75,42 @@ cmake ..
 cmake --build .
 ```
 
-For detailed build instructions, see the [Developer Guide](docs/dev/development_guide.md).
+### Testing
+
+The project includes both unit and integration tests:
+
+```bash
+# Run all tests
+cd build
+ctest
+
+# Run only unit tests
+ctest -R unit
+
+# Run only integration tests (requires additional setup)
+ctest -R integration
+```
+
+For detailed build and testing instructions, see the [Developer Guide](docs/dev/development_guide.md).
+
+## Project Structure
+
+```
+wireshark-mcp/
+├── src/              # Source code
+│   ├── capture/      # Packet capture engine
+│   ├── analysis/     # Protocol analysis modules
+│   ├── ui/           # User interface components
+│   ├── security/     # Authentication and encryption
+│   ├── storage/      # Capture file management
+│   └── common/       # Shared utilities
+├── include/          # Public headers
+├── tests/            # Unit and integration tests
+├── docs/             # Documentation
+├── scripts/          # Installation and utility scripts
+├── config/           # Configuration templates
+└── .github/          # CI/CD workflows
+```
 
 ## Contributing
 
