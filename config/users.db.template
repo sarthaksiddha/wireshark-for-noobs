@@ -1,0 +1,23 @@
+# Wireshark MCP User Database Template
+# 
+# Copy this file to users.db and update with your user information
+# Format: username:password_hash:display_name:email:roles:active
+#
+# Roles are comma-separated: admin,user,capture
+# Active status is "true" or "false"
+#
+# Note: In a real production environment, passwords should be properly hashed
+# This template uses plaintext passwords for simplicity during development
+# 
+
+# Default admin user (Do not use in production!)
+admin:admin123:Administrator:admin@example.com:admin,user,capture:true
+
+# Example regular user
+user:user123:Regular User:user@example.com:user,capture:true
+
+# Example view-only user
+viewer:view123:View Only User:viewer@example.com:user:true
+
+# Example inactive user
+inactive:inactive123:Inactive User:inactive@example.com:user:false
