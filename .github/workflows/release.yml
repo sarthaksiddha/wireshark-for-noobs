@@ -1,0 +1,151 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '5.15.2'
+          
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libpcap-dev libgtest-dev cmake
+          
+      - name: Configure and Build
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release
+          
+      - name: Create Linux Package
+        run: |
+          cd build
+          cpack -G DEB
+          
+      - name: Upload Linux Package
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-package
+          path: build/*.deb
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '5.15.2'
+          
+      - name: Install Dependencies
+        run: |
+          choco install winpcap
+          
+      - name: Configure and Build
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release
+          
+      - name: Create Windows Installer
+        run: |
+          cd build
+          cpack -G NSIS
+          
+      - name: Upload Windows Installer
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows-installer
+          path: build/*.exe
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '5.15.2'
+          
+      - name: Install Dependencies
+        run: |
+          brew install libpcap
+          
+      - name: Configure and Build
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release
+          
+      - name: Create macOS Package
+        run: |
+          cd build
+          cpack -G DragNDrop
+          
+      - name: Upload macOS Package
+        uses: actions/upload-artifact@v2
+        with:
+          name: macos-package
+          path: build/*.dmg
+
+  create-release:
+    needs: [build-linux, build-windows, build-macos]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v2
+        
+      - name: List Downloaded Artifacts
+        run: find . -type f
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          
+      - name: Upload Linux Package to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./linux-package/wireshark-mcp*.deb
+          asset_name: wireshark-mcp-linux.deb
+          asset_content_type: application/vnd.debian.binary-package
+          
+      - name: Upload Windows Installer to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./windows-installer/wireshark-mcp*.exe
+          asset_name: wireshark-mcp-windows.exe
+          asset_content_type: application/octet-stream
+          
+      - name: Upload macOS Package to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./macos-package/wireshark-mcp*.dmg
+          asset_name: wireshark-mcp-macos.dmg
+          asset_content_type: application/octet-stream
