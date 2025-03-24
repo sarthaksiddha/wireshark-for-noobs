@@ -1,0 +1,50 @@
+# Wireshark MCP Configuration Template
+# Copy to wireshark_mcp.conf and modify as needed
+
+# Application Settings
+application.name = Wireshark MCP
+application.version = 1.0.0
+
+# Capture Settings
+capture.buffer_size = 1048576
+capture.promiscuous_mode = true
+capture.default_device = eth0
+capture.default_filter = 
+
+# UI Settings
+ui.dark_mode = false
+ui.font_size = 10
+ui.maximize_on_start = false
+ui.show_toolbar = true
+ui.show_statusbar = true
+ui.packet_list_columns = number,time,source,destination,protocol,length,info
+
+# Security Settings
+security.encryption_level = STANDARD
+security.encrypt_captures = true
+security.local_user_db = users.db
+security.default_auth_method = LOCAL
+
+# LDAP Settings (if enabled)
+security.ldap.enabled = false
+security.ldap.server = ldap.example.com
+security.ldap.port = 389
+security.ldap.base_dn = dc=example,dc=com
+security.ldap.bind_dn = cn=admin,dc=example,dc=com
+security.ldap.user_filter = (uid={0})
+
+# Logging Settings
+logging.level = INFO
+logging.file = wireshark_mcp.log
+logging.max_size = 10485760
+logging.rotate = true
+logging.max_files = 5
+
+# Network Devices (comma-separated list of allowed devices)
+# Empty list means all devices are allowed
+security.allowed_devices = 
+
+# File Locations
+path.captures = ./captures
+path.plugins = ./plugins
+path.temp = ./temp
