@@ -1,124 +1,63 @@
-# Wireshark MCP
+# 🕵️ Wireshark for Network Nerds: Your Digital Packet Playground! 🌐
 
-Wireshark MCP (Minimally Capable Product) - A corporate-grade network analysis tool
+Hey there, network detective! 👋 Ever wanted to dive deep into the secret world of network packets without feeling like you need a PhD in networking? Welcome to Wireshark for Noobs - the ultimate playground for systems geeks who want total control over their network analysis!
 
-## Overview
+## 🚀 What Makes This Different?
 
-Wireshark MCP is a secure, enterprise-ready packet capture and analysis tool based on the foundations of Wireshark. It adds corporate features including:
+This isn't your grandpa's network tool. This is for:
+- 🤓 Systems administrators who love granular control
+- 👩‍💻 Developers who want to peek under the network hood
+- 🕵️ Security enthusiasts who breathe packet data
 
-- **Robust packet capture and analysis** with error handling
-- **Security features** (encrypted storage of capture files)
-- **User authentication** for sensitive network analysis
-- **Logging and audit trails** for compliance
-- **Cross-platform compatibility** (Windows, Linux, macOS)
+## ✨ Features That'll Make Network Nerds Drool
 
-## Features
+- **Full Manual Control**: No black boxes here! You control EVERYTHING.
+- **Detailed Packet Dissection**: Break down packets like a surgical network pathologist
+- **Flexible Filtering**: Want to see ONLY the packets you care about? You got it!
+- **Cross-Platform Magic**: Works on Windows, Linux, and macOS (because we're not picky)
 
-- Secure packet capture with device permission validation
-- Protocol analysis with detailed packet inspection
-- Encrypted storage of sensitive capture files
-- Corporate authentication integration (LDAP/Local)
-- Filter-based packet capture and display
-- Comprehensive logging and auditing
-- Interactive UI with multiple views
-- Extensible plugin architecture
+## 🛠 System Requirements (aka What You Need to Rock This)
 
-## System Requirements
+- **OS**: Windows 10/11, Ubuntu 20.04+, macOS 12+
+- **RAM**: 4GB (minimum), 8GB (recommended for serious packet hunting)
+- **Storage**: 500MB for the app, plus space for your packet treasures
+- **Network Access**: Admin privileges (because great power requires great responsibility!)
 
-- **Operating System**: Windows 10/11, Ubuntu 20.04+, macOS 12+
-- **RAM**: 4GB minimum, 8GB recommended
-- **Storage**: 500MB for application, additional space for capture files
-- **Network**: Admin privileges for capture interfaces
+## 🎮 Quick Start Guide for the Impatient
 
-## Getting Started
+1. Install the tool
+2. Open it up
+3. Select your network interface
+4. Start capturing
+5. Feel like a total network wizard 🧙‍♂️
 
-### Installation
+## 🤖 For the Hardcore Techies
 
-See the [User Guide](docs/user/user_guide.md) for detailed installation instructions for your platform.
-
-We provide installation scripts for:
-- [Linux](scripts/install_linux.sh)
-- [Windows](scripts/install_windows.ps1)
-
-### Configuration
-
-The application uses a [configuration file](config/wireshark_mcp.conf.template) that can be customized for your environment. Copy the template to `wireshark_mcp.conf` and modify as needed.
-
-### Basic Usage
-
-1. Launch Wireshark MCP
-2. Authenticate with your corporate credentials
-3. Select a network interface from the dropdown
-4. Click "Start Capture" to begin capturing packets
-5. Use display filters to focus on traffic of interest
-
-## Documentation
-
-- [User Guide](docs/user/user_guide.md) - Comprehensive guide for end users
-- [Developer Guide](docs/dev/development_guide.md) - Documentation for developers
-
-## Building from Source
-
-### Prerequisites
-
-- C++17 compatible compiler (GCC 8+, Clang 7+, MSVC 2019+)
-- CMake 3.15 or newer
-- Qt 5.15.2 or newer
-- libpcap/WinPcap development libraries
-- Google Test framework (for unit testing)
-
-### Build Instructions
+Want to build from source? We've got you covered:
 
 ```bash
+# For the command-line commandos
 mkdir build && cd build
 cmake ..
 cmake --build .
 ```
 
-### Testing
+## 🤝 Contribute or Get Out!
 
-The project includes both unit and integration tests:
+Love networking? Want to make this tool even more awesome? 
+- Fork the repo
+- Break something
+- Fix it
+- Send a pull request
 
-```bash
-# Run all tests
-cd build
-ctest
+We welcome crazy ideas and coffee-fueled contributions! ☕
 
-# Run only unit tests
-ctest -R unit
+## 🔒 Legal Mumbo Jumbo
 
-# Run only integration tests (requires additional setup)
-ctest -R integration
-```
+This is open-source, but play nice. Don't be that person who does sketchy things with network tools.
 
-For detailed build and testing instructions, see the [Developer Guide](docs/dev/development_guide.md).
+---
 
-## Project Structure
+**Disclaimer**: With great packet power comes great responsibility. Use this tool for good, not evil! 🦸‍♀️🦸‍♂️
 
-```
-wireshark-mcp/
-├── src/              # Source code
-│   ├── capture/      # Packet capture engine
-│   ├── analysis/     # Protocol analysis modules
-│   ├── ui/           # User interface components
-│   ├── security/     # Authentication and encryption
-│   ├── storage/      # Capture file management
-│   └── common/       # Shared utilities
-├── include/          # Public headers
-├── tests/            # Unit and integration tests
-├── docs/             # Documentation
-├── scripts/          # Installation and utility scripts
-├── config/           # Configuration templates
-└── .github/          # CI/CD workflows
-```
-
-## Contributing
-
-We welcome contributions to Wireshark MCP! Please see our [Developer Guide](docs/dev/development_guide.md) for details on how to contribute.
-
-## License
-
-Copyright (c) 2025 Your Company
-
-This software is proprietary and confidential.
-Unauthorized copying, distribution, or use is strictly prohibited.
+Happy Packet Hunting! 🕵️‍♀️🌐
